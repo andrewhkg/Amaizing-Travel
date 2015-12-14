@@ -1,9 +1,8 @@
 require('dotenv').load();
-var express  = require('express');
-var config   = require('./config/config');
-var glob     = require('glob');
-var mongoose = require('mongoose');
-// angular.module('AtApp', []);
+var express        = require('express');
+var config         = require('./config/config');
+var glob           = require('glob');
+var mongoose       = require('mongoose');
 
 // MongoDB Setup
 mongoose.connect(config.db);
@@ -21,9 +20,6 @@ models.forEach(function (model) {
 // App Initialization
 var app = express();
 require('./config/express')(app, config);
-
-// app.set('views', __dirname + '/views');
-// app.set('view engine', 'jade');
 
 // Server Start :)
 app.listen(config.port, function () {

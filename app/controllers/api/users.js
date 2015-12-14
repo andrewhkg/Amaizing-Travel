@@ -1,7 +1,7 @@
 var express  = require('express');
 var router   = express.Router();
 var mongoose = require('mongoose');
-var Booking = require('../../models/booking')
+var Attraction = require('../../models/user')
 
 module.exports = function (app) {
   app.use('/api', router);
@@ -18,44 +18,45 @@ function authenticatedUser(req, res, next) {
 }
 
 //INDEX
-router.get('/bookings', function (req, res){
-  Booking.find({}, function (err, bookings){
+router.get('/users', function (req, res){
+  User.find({}, function (err, users){
+    console.log(users)
     if (err) {
       res.json({message: "There was an error with your GET request " + err});
     } else {
-      res.json({bookings: bookings});
+      res.json({users: users});
     }
-  }).populate("attraction_id");
+  });
 })
 
 //SHOW
-router.get('/bookings/:id', function (req, res){
-  Booking.findById(req.params.id, function (err, booking){
+router.get('/users/:id', function (req, res){
+  User.findById(req.params.id, function (err, user){
     if (err) {
       res.status(400).json({message: "There was an error with your GET request " + err});
     } else {
-      res.status(200).json(booking);
+      res.status(200).json(user);
     }
   });
 })
 
 // //POST
-router.post('/bookings', function (req, res){
-  Booking.create(req.body.booking, function (err, booking){
+router.post('/users', function (req, res){
+  User.create(req.body.user, function (err, user){
     if (err) {
-      res.json({message: "There was an error with your POST request " + err});
+      res.json({message: "There was an error with your GET request " + err});
     } else {
       res.json({message: "Created!"})
-      // res.json(booking)
+      // res.json(user)
     }
   });
 })
 
 // //PUT
-router.put('/bookings/:id', function (req, res){
-  Booking.findByIdAndUpdate(req.params.id, req.body.booking, function (err, bookings){
+router.put('/users/:id', function (req, res){
+  User.findByIdAndUpdate(req.params.id, req.body.user,function (err, users){
     if (err) {
-      res.json({message: "There was an error with your PUT request " + err});
+      res.json({message: "There was an error with your GET request " + err});
     } else {
       res.json({message: "ok" });
     }
@@ -63,10 +64,10 @@ router.put('/bookings/:id', function (req, res){
 })
 
 // DELETE
-router.delete('/bookings/:id', function (req, res){
-  Booking.findByIdAndRemove(req.params.id, function (err, booking){
+router.delete('/users/:id', function (req, res){
+  User.findByIdAndRemove(req.params.id, function (err, users){
     if (err) {
-      res.json({message: "There was an error with your DELETE request " + err});
+      res.json({message: "There was an error with your GET request " + err});
     } else {
       res.json({message: "ok" });
     }

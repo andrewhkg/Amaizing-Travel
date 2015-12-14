@@ -1,29 +1,33 @@
 {
-  "name": "Amaizing-Travel",
+  "name": "amazing-travel",
   "version": "0.0.1",
   "scripts": {
     "start": "nodemon app.js"
   },
   "dependencies": {
+    "angular": "^1.4.8",
+    "angular-ui-router": "^0.2.15",
     "bcrypt": "^0.8.5",
     "body-parser": "^1.13.2",
-    "ejs": "^2.3.3",
-    "express-ejs-layouts": "^2.0.0",
+    "compression": "^1.5.2",
     "connect-flash": "^0.1.1",
     "cookie-parser": "~1.3.5",
+    "cors": "^2.7.1",
     "debug": "~2.2.0",
+    "dotenv": "^1.2.0",
+    "ejs": "^2.3.3",
     "express": "~4.13.1",
+    "express-ejs-layouts": "^2.0.0",
+    "express-mailer": "^0.3.0",
+    "express-session": "^1.12.1",
+    "glob": "^5.0.3",
     "method-override": "^2.3.4",
     "mongoose": "^4.0.7",
     "morgan": "~1.6.1",
-    "dotenv": "^1.2.0",
-    "express-mailer": "^0.3.0",
-    "express-session": "^1.12.1",
     "passport": "^0.3.2",
     "passport-facebook": "^2.0.0",
     "passport-local": "^1.0.0",
-    "serve-favicon": "^2.3.0",
-    "glob": "^5.0.3"
+    "serve-favicon": "^2.3.0"
   },
   "license": "ISC"
 }

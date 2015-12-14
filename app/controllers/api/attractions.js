@@ -20,6 +20,7 @@ function authenticatedUser(req, res, next) {
 //INDEX
 router.get('/attractions', function (req, res){
   Attraction.find({}, function (err, attractions){
+    console.log(attractions)
     if (err) {
       res.json({message: "There was an error with your GET request " + err});
     } else {

@@ -3,7 +3,7 @@ var router   = express.Router();
 var mongoose = require('mongoose');
 
 module.exports = function (app) {
-  app.use('/', router);
+  app.use('/api', router);
 };
 
 function authenticatedUser(req, res, next) {
