@@ -45,7 +45,8 @@ router.post('/bookings', function (req, res){
     if (err) {
       res.json({message: "There was an error with your POST request " + err});
     } else {
-      res.json({message: "Created!"})
+      res.json({booking: booking})
+      // res.json({message: "Created!"})
       // res.json(booking)
     }
   });

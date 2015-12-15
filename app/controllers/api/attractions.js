@@ -46,8 +46,8 @@ router.post('/attractions', function (req, res){
     if (err) {
       res.json({message: "There was an error with your GET request " + err});
     } else {
-      res.json({message: "Created!"})
-      // res.json(attraction)
+      res.json({message: "Created!"});
+      res.json(attraction)
     }
   });
 })

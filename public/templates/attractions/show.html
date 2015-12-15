@@ -14,7 +14,7 @@
   </li>
 </ol>
 
-<div class="col-sm-9">
+<div class="col-sm-12">
         <h3>
           <a href="/#/attractions/{{attraction._id}}">{{attraction.name}}, {{attraction.city}}</a>
         </h3>
@@ -34,6 +34,11 @@
             <p><em>Ticket type:</em>  {{attraction.tkts_type}}</p>
             <p><em>How to use:</em><br>{{attraction.use_tkts}}</p>
             <p><em>How To Get There:</em> <br> {{attraction.to_go_there}}</p>
+
+              <section id="map" ng-controller="MapCtrl" >
+                <div ui-map="myMap" ui-options="mapOptions" class="map-canvas"></div>
+              </section>
+
             <a class="btn btn-danger" href="/#/attractions/{{attraction._id}}/book">Book</a>
         </div>
       </div>
