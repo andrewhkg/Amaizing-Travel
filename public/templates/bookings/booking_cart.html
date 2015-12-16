@@ -9,7 +9,7 @@
     <a href="#/attractions">Attractions</a>
   </li>
   <li class="active">
-    Booking {{ attraction.name }}
+    Booking {{ booking._id }}
   </li>
 </ol>
 
@@ -18,9 +18,28 @@
   <div class="row">
     <div class="col-sm-12">
       <h3>Booking cart</h3>
-      <div class="col-sm-6 col-md-6 col-lg-6">
-        <p>{{ attraction.name}}</p>
+    <div class="col-sm-6 col-md-6 col-lg-6">
+        <p>You choosed attraction:</p>
+        <p>{{ }}</p>
+        <p>{{ booking._id }}</p>
 
+        <p>Date:</p>
+        {{booking.date | date:'yyyy-MM-dd'}}
+
+        <p>Quantity adults tickets:</p>
+          {{booking.qnt_adult}}
+
+        <p>Quantity childs tickets:</p>
+          {{booking.qnt_adult}}
+
+        <div ng-init="getOne()">
+        <p>Total price for payment, HKD:</p>
+         {{ total_price | currency}}
+         {{ attraction._id }}
+         </div>
+
+
+        <br>
         <label>Please proceed for payment</label>
         <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
         <input type="hidden" name="cmd" value="_s-xclick">

@@ -1,5 +1,6 @@
-app.controller('AttractionCtrl', ['$scope', '$http', '$stateParams','$state', function($scope, $http, $stateParams, $state){
+app.controller('AttractionCtrl', ['CurrentUser', '$scope', '$http', '$stateParams','$state', function(CurrentUser, $scope, $http, $stateParams, $state){
   $scope.total_price = 0;
+
 
   $scope.getAll = function () {
     $http({
@@ -22,15 +23,18 @@ app.controller('AttractionCtrl', ['$scope', '$http', '$stateParams','$state', fu
     });
   }
 
+
   $scope.addBooking = function () {
     console.log('booking started saving');
-    $http({
-      method: "POST",
-      url: 'http://localhost:3000/api/bookings/'
-    }).then(function(response){
+    $http.post('http://localhost:3000/api/bookings/',
+      {booking: $scope.booking})
+    .then(function(response){
       console.log(response.data)
       $scope.booking = response.data;
-      $state.go('cart');
+      $state.go('cart', {bookingId: response.data.booking._id} );
+    })
+    .otherwise({
+      redirectTo: '/login'
     });
   }
 
@@ -54,19 +58,23 @@ app.controller('AttractionCtrl', ['$scope', '$http', '$stateParams','$state', fu
   };
 
   $scope.updateTotal = function() {
-   $scope.total_price = parseInt($scope.booking.qnt_adult) * parseInt($scope.attraction.price_adult_discount) + parseInt($scope.booking.qnt_child) * parseInt($scope.attraction.price_child_discount)
-   console.log($scope.attraction.price_adult_discount);
-   console.log($scope.attraction.price_child_discount);
-   console.log($scope.total_price);
+
+    $scope.total_price = parseInt($scope.booking.qnt_adult) * parseInt($scope.attraction.price_adult_discount) + parseInt($scope.booking.qnt_child) * parseInt($scope.attraction.price_child_discount)
+
+    // console.log($scope.attraction.price_adult_discount);
+    // console.log($scope.attraction.price_child_discount);
+    // console.log($scope.total_price);
   };
 
   $scope.cartBooking = function () {
-     console.log('shoping cart for booking');
+    console.log('booking_cart');
+    console.log($stateParams.bookingId);
     $http({
       method: "GET",
-      url: 'http://localhost:3000/api/bookings/'
+      url: 'http://localhost:3000/api/bookings/' + $stateParams.bookingId
     }).then(function(response){
-      console.log(response.data)
+      console.log('we got a booking from the server');
+      console.log(response.data);
       $scope.booking = response.data;
     });
   };

@@ -5,3 +5,5 @@ function myCurrentUserFunction($resource) {
     user: null
   }
 };
+
+

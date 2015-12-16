@@ -23,7 +23,7 @@
       <img class="img-responsive img-thumbnail" ng-src="{{attraction.picture}}">
 
       <datepicker date-format="longDate">
-        <input placeholder="Choose a date"/>
+        <input ng-model="booking.date" placeholder="Choose a date"/>
       </datepicker>
 
       <label for="selectAdult">
@@ -52,7 +52,7 @@
 
       <br>
 
-      <button class="btn btn-danger" ng-click="addBooking()">Book</button><br>
+      <button class="btn btn-danger" ng-click="addBooking()" ng-disabled="total_price == 0 || booking.date == ''">Book</button><br>
     </form>
   </div>
 </div>

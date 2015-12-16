@@ -41,6 +41,10 @@ router.get('/bookings/:id', function (req, res){
 
 // //POST
 router.post('/bookings', function (req, res){
+  console.log('req.body.booking');
+  console.log(req.body.booking);
+  // booking: { qnt_adult: '3', qnt_child: '2', date: 'December 7, 2015' }
+
   Booking.create(req.body.booking, function (err, booking){
     if (err) {
       res.json({message: "There was an error with your POST request " + err});

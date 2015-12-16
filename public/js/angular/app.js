@@ -1,8 +1,4 @@
-function onGoogleReady() {
-  angular.bootstrap(document.getElementById("map"), ['app.ui-map']);
-}
-
-var app = angular.module("amazingApp", "app.ui-map", ["ui.router", "ngResource", "720kb.datepicker", "ui.map"]);
+var app = angular.module("amazingApp", ["ui.router", "ngResource", "720kb.datepicker"]);
 
 app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('/');
@@ -21,11 +17,13 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
       url: '/attractions/:id/book',
       templateUrl: '/templates/bookings/book.html',
       controller: 'AttractionCtrl'
+
     })
     .state('cart', {
       url: '/booking_confirmation',
       templateUrl: '/templates/bookings/booking_cart.html',
-      controller: 'AttractionCtrl'
+      controller: 'AttractionCtrl',
+      params: {bookingId: 'default_value'}
     })
     .state('show', {
       url: '/attractions/:id',
