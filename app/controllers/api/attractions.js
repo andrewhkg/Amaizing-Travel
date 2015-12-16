@@ -13,18 +13,17 @@ function authenticatedUser(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   } else {
-    return res.json({message: "Please Login"});
+    return res.status(400).json({message: "Please Login"});
   }
 }
 
 //INDEX
 router.get('/attractions', function (req, res){
   Attraction.find({}, function (err, attractions){
-    console.log(attractions)
     if (err) {
-      res.json({message: "There was an error with your GET request " + err});
+      res.status(400).json({message: "There was an error with your GET request " + err});
     } else {
-      res.json({attractions: attractions});
+      res.status(200).json({attractions: attractions});
     }
   });
 })
@@ -44,10 +43,9 @@ router.get('/attractions/:id', function (req, res){
 router.post('/attractions', function (req, res){
   Attraction.create(req.body.attraction, function (err, attraction){
     if (err) {
-      res.json({message: "There was an error with your GET request " + err});
+      res.status(400).json({message: "There was an error with your GET request " + err});
     } else {
-      res.json({message: "Created!"});
-      res.json(attraction)
+      res.status(200).json(attraction)
     }
   });
 })
@@ -56,9 +54,9 @@ router.post('/attractions', function (req, res){
 router.put('/attractions/:id', function (req, res){
   Attraction.findByIdAndUpdate(req.params.id, req.body.attraction,function (err, attractions){
     if (err) {
-      res.json({message: "There was an error with your GET request " + err});
+      res.status(400).json({message: "There was an error with your GET request " + err});
     } else {
-      res.json({message: "ok" });
+      res.status(200).json(attraction)
     }
   });
 })
@@ -67,9 +65,9 @@ router.put('/attractions/:id', function (req, res){
 router.delete('/attractions/:id', function (req, res){
   Attraction.findByIdAndRemove(req.params.id, function (err, attractions){
     if (err) {
-      res.json({message: "There was an error with your GET request " + err});
+      res.status(400).json({message: "There was an error with your GET request " + err});
     } else {
-      res.json({message: "ok" });
+      res.status(200).json({message: "ok" });
     }
   });
 })

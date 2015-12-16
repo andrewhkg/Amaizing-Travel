@@ -1,0 +1,35 @@
+<nav-bar></nav-bar>
+
+<ol class="breadcrumb">
+  <li><a href="#/">Home</a></li>
+  <li><a href="#/attractions">Attractions</a></li>
+  <li class="active">Booking {{ booking._id }}</li>
+</ol>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <h3>Booking cart</h3>
+      <div class="col-sm-6 col-md-6 col-lg-6">
+        <p>You choosed attraction: <span>{{ attraction.name }}</span></p>
+
+        <p>Date: <span>{{booking.date | date:'yyyy-MM-dd'}}</span></p>
+
+        <p>Quantity adults tickets: <span>{{booking.qnt_adult}}</span></p>
+
+        <p>Quantity childs tickets: <span>{{booking.qnt_adult}}</span></p>
+
+        <p>Total price for payment, HKD: <span>{{ booking.total_price | currency}}</span></p>
+
+        <br>
+        <label>Please proceed for payment</label>
+        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+          <input type="hidden" name="cmd" value="_s-xclick">
+          <input type="hidden" name="hosted_button_id" value="BVB827HR4HK6S">
+          <input type="image" src="https://www.paypalobjects.com/en_GB/HK/i/btn/btn_buynowCC_LG_wCUP.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online.">
+          <img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

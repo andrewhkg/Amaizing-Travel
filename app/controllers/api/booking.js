@@ -13,7 +13,7 @@ function authenticatedUser(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   } else {
-    return res.json({message: "Please Login"});
+    return res.status(400).json({message: "Please Login"});
   }
 }
 
@@ -21,9 +21,9 @@ function authenticatedUser(req, res, next) {
 router.get('/bookings', function (req, res){
   Booking.find({}, function (err, bookings){
     if (err) {
-      res.json({message: "There was an error with your GET request " + err});
+      res.status(400).json({message: "There was an error with your GET request " + err});
     } else {
-      res.json({bookings: bookings});
+      res.status(200).json({bookings: bookings});
     }
   }).populate("attraction_id");
 })
@@ -36,33 +36,27 @@ router.get('/bookings/:id', function (req, res){
     } else {
       res.status(200).json(booking);
     }
-  });
+  }).populate("attraction_id");
 })
 
 // //POST
-router.post('/bookings', function (req, res){
-  console.log('req.body.booking');
-  console.log(req.body.booking);
-  // booking: { qnt_adult: '3', qnt_child: '2', date: 'December 7, 2015' }
-
+router.post('/bookings', authenticatedUser, function (req, res){
   Booking.create(req.body.booking, function (err, booking){
     if (err) {
-      res.json({message: "There was an error with your POST request " + err});
+      res.status(400).json({message: "There was an error with your POST request " + err});
     } else {
-      res.json({booking: booking})
-      // res.json({message: "Created!"})
-      // res.json(booking)
+      res.status(200).json(booking)
     }
   });
 })
 
 // //PUT
 router.put('/bookings/:id', function (req, res){
-  Booking.findByIdAndUpdate(req.params.id, req.body.booking, function (err, bookings){
+  Booking.findByIdAndUpdate(req.params.id, req.body.booking, function (err, booking){
     if (err) {
-      res.json({message: "There was an error with your PUT request " + err});
+      res.status(400).json({message: "There was an error with your PUT request " + err});
     } else {
-      res.json({message: "ok" });
+      res.status(200).json(booking);
     }
   });
 })
@@ -71,9 +65,9 @@ router.put('/bookings/:id', function (req, res){
 router.delete('/bookings/:id', function (req, res){
   Booking.findByIdAndRemove(req.params.id, function (err, booking){
     if (err) {
-      res.json({message: "There was an error with your DELETE request " + err});
+      res.status(400).json({message: "There was an error with your DELETE request " + err});
     } else {
-      res.json({message: "ok" });
+      res.status(200).json({message: "ok" });
     }
   });
 })
