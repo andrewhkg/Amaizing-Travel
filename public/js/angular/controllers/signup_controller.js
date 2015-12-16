@@ -4,11 +4,11 @@ app.controller('SignupCtrl', ['CurrentUser', '$scope', '$http', '$state', functi
       method: "POST",
       url: "http://localhost:3000/signup",
       data: $scope.signupForm
-    }).then(function (data){
-      console.log(data);
-      $state.go('signin');
-    }, function (data){
-      console.log(data.data.message)
+    }).then(function (response){
+      console.log(response);
+      $state.go('attractions');
+    }, function (response){
+      console.log(response.data.message)
     })
-  }
-}])
+  };
+}]);

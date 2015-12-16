@@ -1,64 +1,44 @@
-<div class="row" ng-init="getOne()">
 <nav-bar></nav-bar>
 
 <ol class="breadcrumb">
-  <li>
-    <a href="#/">Home</a>
-  </li>
-  <li>
-    <a href="#/attractions">Attractions</a>
-  </li>
-  <li class="active">
-    Booking - {{ attraction.name }}
-  </li>
+  <li><a href="#/">Home</a></li>
+  <li><a href="#/attractions">Attractions</a></li>
+  <li class="active">Booking - {{ attraction.name }}</li>
 </ol>
+
 <div class="container-fluid">
   <div class="row">
-  <div class="col-sm-12">
+    <div class="col-sm-12">
+      <div class="col-sm-6 col-md-6 col-lg-6">
+        <div class="row">
+          <form name="myBookingForm" ng-submit="addBooking()">
+            <h3>{{attraction.name}}, {{attraction.city}}</h3>
+            <img class="img-responsive img-thumbnail" ng-src="{{attraction.picture}}">
 
-  <div class="col-sm-6 col-md-6 col-lg-6">
-  <div class="row">
-    <form name="myBookingForm">
-      <h3>{{attraction.name}}, {{attraction.city}}</h3>
-      <img class="img-responsive img-thumbnail" ng-src="{{attraction.picture}}">
+            <datepicker date-format="longDate">
+              <input ng-model="booking.date" placeholder="Choose a date"/>
+            </datepicker>
 
-      <datepicker date-format="longDate">
-        <input placeholder="Choose a date"/>
-      </datepicker>
+            <label for="selectAdult">Select adults' quantity:</label>
+            <select name="selectAdult" id="selectAdult" ng-model="booking.qnt_adult" ng-change="updateTotal()">
+              <option ng-repeat="option in data.availableOptions" value="{{option.id}}">{{option.name}}</option>
+            </select>
+            <br>
 
-      <label for="selectAdult">
-      <option>Select adults' quantity: </option>
-      </label>
-      <select name="selectAdult" id="selectAdult" ng-model="booking.qnt_adult" ng-change="updateTotal()">
-        <option ng-repeat="option in data.availableOptions" value="{{option.id}}">{{option.name}}</option>
-      </select>
+            <label for="selectChild">Select childrens' quantity:</label>
+            <select name="selectChild" id="selectChild" ng-model="booking.qnt_child" ng-change="updateTotal()">
+              <option ng-repeat="option in data.availableOptions" value="{{option.id}}">{{option.name}}</option>
+            </select>
+            <br/>
 
-      <br>
+            <label>Total price: <span id="price">{{ booking.total_price | currency}} HKD</span></label>
+            <br>
 
-      <label for="selectChild">
-      <option>Select childrens' quantity: </option>
-      </label>
-      <select name="selectChild" id="selectChild" ng-model="booking.qnt_child" ng-change="updateTotal()">
-        <option ng-repeat="option in data.availableOptions" value="{{option.id}}">{{option.name}}</option>
-      </select>
-
-      <br/>
-
-      <label>Total price:
-        <span id="price">
-          {{ total_price | currency}} HKD
-        </span>
-      </label>
-
-      <br>
-
-      <button class="btn btn-danger" ng-click="addBooking()">Book</button><br>
-    </form>
+            <button class="btn btn-danger" type="submit" ng-disabled="checkParams()">Book</button><br>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
-</div>
-
-
-</div>
 </div>
 

@@ -13,18 +13,17 @@ function authenticatedUser(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   } else {
-    return res.json({message: "Please Login"});
+    return res.status(400).json({message: "Please Login"});
   }
 }
 
 //INDEX
 router.get('/users', function (req, res){
   User.find({}, function (err, users){
-    console.log(users)
     if (err) {
-      res.json({message: "There was an error with your GET request " + err});
+      res.status(400).json({message: "There was an error with your GET request " + err});
     } else {
-      res.json({users: users});
+      res.status(200).json({users: users});
     }
   });
 })
@@ -44,32 +43,31 @@ router.get('/users/:id', function (req, res){
 router.post('/users', function (req, res){
   User.create(req.body.user, function (err, user){
     if (err) {
-      res.json({message: "There was an error with your GET request " + err});
+      res.status(400).json({message: "There was an error with your GET request " + err});
     } else {
-      res.json({message: "Created!"})
-      // res.json(user)
+      res.status(200).json(user);
     }
   });
 })
 
 // //PUT
 router.put('/users/:id', function (req, res){
-  User.findByIdAndUpdate(req.params.id, req.body.user,function (err, users){
+  User.findByIdAndUpdate(req.params.id, req.body.user,function (err, user){
     if (err) {
-      res.json({message: "There was an error with your GET request " + err});
+      res.status(400).json({message: "There was an error with your GET request " + err});
     } else {
-      res.json({message: "ok" });
+      res.status(200).json(user);
     }
   });
 })
 
 // DELETE
 router.delete('/users/:id', function (req, res){
-  User.findByIdAndRemove(req.params.id, function (err, users){
+  User.findByIdAndRemove(req.params.id, function (err, user){
     if (err) {
-      res.json({message: "There was an error with your GET request " + err});
+      res.status(400).json({message: "There was an error with your GET request " + err});
     } else {
-      res.json({message: "ok" });
+      res.status(200).json({message: "ok" });
     }
   });
 })

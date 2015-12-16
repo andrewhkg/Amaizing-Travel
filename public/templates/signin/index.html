@@ -1,5 +1,11 @@
 <nav-bar></nav-bar>
-<breadcrumb></breadcrumb>
+
+<ol class="breadcrumb">
+  <li><a href="#/">Home</a></li>
+  <li><a href="#/attractions">Attractions</a></li>
+  <li class="active">{{ attraction.name}}</li>
+</ol>
+
 <h1>Sign In</h1>
 
 <form ng-submit="submit()" class="form-block" ng-init="siginForm = {}">
@@ -19,8 +25,8 @@
   <button type="submit" class="btn btn-default">Sign in</button>
 </form>
 <div align="center">
-<p>If dont have account, please</p>
-<a href="/#/signup">
-<button type="submit" class="btn btn-default ">Sign up</button>
-</a>
+  <p>If dont have account, please</p>
+  <a href="/#/signup">
+  <button type="submit" class="btn btn-default ">Sign up</button>
+  </a>
 </div>

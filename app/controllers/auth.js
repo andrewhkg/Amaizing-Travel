@@ -11,7 +11,6 @@ module.exports = function (app) {
 // SIGN-UP: Create a new User
 router.post('/signup', function (req, res, next) {
   passport.authenticate('local-signup', function (err, user, info) {
-    console.log(err, user, info)
     if (err) { return next(err); }
     if (!user) { return res.status(404).json(info); }
     req.logIn(user, function(err) {
@@ -24,7 +23,6 @@ router.post('/signup', function (req, res, next) {
 // SIGN-IN: Authenticate the user
 router.post("/signin", function (req, res, next) {
   passport.authenticate('local-signin', function (err, user, info) {
-    console.log(err, user, info)
     if (err) { return next(err); }
     if (!user) { return res.status(404).json(info); }
     req.logIn(user, function(err) {
@@ -41,7 +39,13 @@ router.delete("/signout", function (req, res, next){
 
 router.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email'} ));
 
-router.get('/auth/facebook/callback', passport.authenticate('facebook', {
-  successRedirect: '/',
-  failureRedirect: '/'
-}));
+router.get('/auth/facebook/callback', function (req, res, next) {
+  passport.authenticate('facebook', function (err, user, info) {
+    if (err) { return next(err); }
+    if (!user) { return res.status(404).json(info); }
+    req.logIn(user, function(err) {
+      if (err) { return next(err); }
+      return res.json(user);
+    });
+  })(req, res, next);
+})
