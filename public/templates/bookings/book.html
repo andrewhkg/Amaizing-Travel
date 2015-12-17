@@ -15,9 +15,6 @@
             <h3>{{attraction.name}}, {{attraction.city}}</h3>
             <img class="img-responsive img-thumbnail" ng-src="{{attraction.picture}}">
 
-            <datepicker date-format="longDate">
-              <input ng-model="booking.date" placeholder="Choose a date"/>
-            </datepicker>
 
             <label for="selectAdult">Select adults' quantity:</label>
             <select name="selectAdult" id="selectAdult" ng-model="booking.qnt_adult" ng-change="updateTotal()">
@@ -30,6 +27,9 @@
               <option ng-repeat="option in data.availableOptions" value="{{option.id}}">{{option.name}}</option>
             </select>
             <br/>
+            <datepicker date-format="longDate">
+              <input ng-model="booking.date" placeholder="Choose a date"/>
+            </datepicker>
 
             <label>Total price: <span id="price">{{ booking.total_price | currency}} HKD</span></label>
             <br>

@@ -6,10 +6,10 @@
   <li class="active">{{ attraction.name}}</li>
 </ol>
 
-<h1>{{attraction.name}}</h1>
+<h2>{{attraction.name}}</h2>
 
 <div class="col-sm-12">
-  <h3><a href="/#/attractions/{{attraction._id}}">{{attraction.name}}, {{attraction.city}}</a></h3>
+  <!-- <h3><a href="/#/attractions/{{attraction._id}}">{{attraction.name}}, {{attraction.city}}</a></h3> -->
 
   <div class="row">
     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -19,9 +19,12 @@
     </div>
 
     <div class="col-sm-6 col-md-6 col-lg-6">
-      <p>{{attraction.description}}</p>
-      <p>Price for adult original:  <strike>{{attraction.price_adult}} HKD</strike>, now <strong style="color:red">{{attraction.price_adult_discount}} HKD</strong> </p>
-      <p>Price for child (3 - 11 years old): <strike> {{attraction.price_child}} HKD</strike>, now <strong style="color:red">{{attraction.price_child_discount}} HKD</strong></p>
+      <!-- <p>{{attraction.description}}</p> -->
+      <div ng-repeat="package in attraction.packages">
+        <p>Price for {{package.name}}: <strike>{{package.price}} HKD</strike> {{ package.discount_price }} HKD</p>
+      </div>
+        <!-- <p>Price for adult original:  <strike>{{attraction.price_adult}} HKD</strike>, now <strong style="color:red">{{attraction.price_adult_discount}} HKD</strong> </p>
+        <p>Price for child  : <strike> {{attraction.price_child}} HKD</strike>, now <strong style="color:red">{{attraction.price_child_discount}} HKD</strong></p> -->
       <!-- <p>Price for adult 2 - days original:  <strike>{{attraction.price_adult_two_days}}</strike>, now <strong style="color:red">{{attraction.price_adult_two_days_discount}} HKD</strong> </p> -->
       <p><em>Ticket type:</em>  {{attraction.tkts_type}}</p>
       <p><em>How to use:</em><br>{{attraction.use_tkts}}</p>
